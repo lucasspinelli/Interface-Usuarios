@@ -25,7 +25,7 @@ class UserController  {
 
         let user = {};
 
-        this.formEl.elements.forEach(function(field, index){ //encontrou o campo nome? Executa o código
+        [...this.formEl.elements].forEach(function(field, index){ //... = Spread
 
             if (field.name == "gender"){ // == compara o valor === compara valor e tipo
         
