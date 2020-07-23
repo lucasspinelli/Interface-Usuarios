@@ -15,9 +15,43 @@ class UserController  {
 
          event.preventDefault(); //cancelar o comportamento padrão
 
-        this.addLine(this.getValues());
+        let values =  this.getValues();
+
+        this.getPhoto((content)=>{
+
+            values.photo = content;
+
+            this.addLine(values);
 
         });
+
+        
+
+        });
+
+    }
+
+    getPhoto(callback){
+
+        let fileReader = new FileReader(); //API nativa para ler arquivos
+
+        let elements = [...this.formEl.elements].filter(item=>{
+
+            if (item.name === 'photo'){
+                return item;
+            }
+
+        });
+
+        let file = (elements[0].files[0]);
+
+        fileReader.onload =()=>{ //Ação a ser feita ao carregar um CALLBACK
+
+            callback(fileReader.result);
+
+        };
+
+        fileReader.readAsDataURL(file);
 
     }
 
@@ -58,7 +92,7 @@ class UserController  {
     
         this.tableEl.innerHTML =/* `` == Template String*/ ` 
             <tr>
-                <td><img src="dist/img/user1-128x128.jpg" alt="User Image" class="img-circle img-sm"></td>
+                <td><img src="${dataUser.photo}" alt="User Image" class="img-circle img-sm"></td>
                 <td>${dataUser.name}</td>
                 <td>${dataUser.email}</td>
                 <td>${dataUser.admin}</td>
