@@ -17,14 +17,18 @@ class UserController  {
 
         let values =  this.getValues();
 
-        this.getPhoto((content)=>{
+        this.getPhoto().then(
+            (content)=>{
 
-            values.photo = content;
+                values.photo = content;
 
-            this.addLine(values);
+                this.addLine(values);
 
-        });
-
+         }, 
+            (e) => {
+            console.error(e);
+         }
+        );
         
 
         });
@@ -32,27 +36,39 @@ class UserController  {
     }
 
     getPhoto(callback){
+        // MUDANDO PRA ARROW FUNCTION PARA NÃO MUDAR O ESCOPO DO formEl
+        return new Promise((resolve, reject)=>{ //Promise é uma classe e precisa ser instanciada
 
-        let fileReader = new FileReader(); //API nativa para ler arquivos
+            let fileReader = new FileReader(); //API nativa para ler arquivos
 
-        let elements = [...this.formEl.elements].filter(item=>{
+            let elements = [...this.formEl.elements].filter(item=>{
 
             if (item.name === 'photo'){
                 return item;
             }
 
+            });
+
+            let file = (elements[0].files[0]);
+
+            fileReader.onload =()=>{ //Ação a ser feita ao carregar um CALLBACK
+
+                resolve(fileReader.result);
+
+            };
+
+            fileReader.onerror = (e)=>{
+
+                reject(e);
+
+            };
+
+            fileReader.readAsDataURL(file);
+
+
         });
 
-        let file = (elements[0].files[0]);
-
-        fileReader.onload =()=>{ //Ação a ser feita ao carregar um CALLBACK
-
-            callback(fileReader.result);
-
-        };
-
-        fileReader.readAsDataURL(file);
-
+        
     }
 
     getValues(){
