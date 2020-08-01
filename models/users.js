@@ -80,4 +80,35 @@ class User {
 
     }
 
+    static getUsersStorage(){
+
+        let users = [];
+
+        if(localStorage.getItem("users")){
+
+            users = JSON.parse(localStorage.getItem("users"));
+
+        }
+
+        return users;
+
+    }
+
+    save(){
+
+        let users = User.getUsersStorage();
+
+        if (this.id > 0){
+
+            
+
+        }
+ 
+        users.push(data);
+
+        //sessionStorage.setItem("users",JSON.stringify(users)); // Primeiro parâmetro = Chave, segundo = Valor
+        localStorage.setItem("users",JSON.stringify(users));
+
+    }
+
 }
