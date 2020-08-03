@@ -199,23 +199,9 @@ class UserController  {
 
     }
 
-    getUsersStorage(){
-
-        let users = [];
-
-        if(localStorage.getItem("users")){
-
-            users = JSON.parse(localStorage.getItem("users"));
-
-        }
-
-        return users;
-
-    }
-
     selectAll(){
 
-       let users = this.getUsersStorage();
+       let users = User.getUsersStorage();
 
         users.forEach(dataUser=>{
 
@@ -270,7 +256,13 @@ class UserController  {
 
                 if (confirm("Deseja Realmente Excluir?")) {
 
-                    tr.remove();
+                    let user = new User();
+
+                    user.loadFromJSON(JSON.parse(tr.dataset.user))
+
+                    user.remove(); // Método criado na instacia do objeto, mais auto explicativo
+
+                    tr.remove(); // remove = Método nativo JS, por conta do HTML
 
                     this.updateCount();
 

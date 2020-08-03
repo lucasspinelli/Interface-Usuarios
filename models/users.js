@@ -101,11 +101,15 @@ class User {
 
     getNewID(){
 
-        if (!window.id) window.id = 0;
+        let usersID = parseInt(localStorage.getItem("usersID"));
 
-        id++; 
+        if (!usersID > 0) usersID = 0;
 
-        return id;
+        usersID++; 
+
+        localStorage.setItem("usersID", usersID);
+
+        return usersID;
 
     }
 
@@ -138,6 +142,24 @@ class User {
         }
  
         //sessionStorage.setItem("users",JSON.stringify(users)); // Primeiro parâmetro = Chave, segundo = Valor
+        localStorage.setItem("users",JSON.stringify(users));
+
+    }
+
+    remove(){
+
+        let users = User.getUsersStorage();
+
+        users.forEach((userData, index)=>{
+
+            if(this._id == userData._id){
+
+                users.splice(index, 1); //splice = método nativo para remover o index de um array
+
+            }
+
+        });
+
         localStorage.setItem("users",JSON.stringify(users));
 
     }
