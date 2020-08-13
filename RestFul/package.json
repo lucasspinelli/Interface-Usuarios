@@ -13,6 +13,7 @@
     "consign": "^0.1.6",
     "express": "^4.17.1",
     "express-validator": "^5.1.2",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "restify-clients": "^3.0.0"
   }
 }
