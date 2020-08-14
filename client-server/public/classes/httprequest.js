@@ -52,13 +52,12 @@ class HttpRequest{
             resolve(obj);
      
         };
+
+        ajax.setRequestHeader('Content-Type', 'application/json');
  
-        ajax.send(); //chamar a solicitação ajax
+        ajax.send(JSON.stringify(params)); //chamar a solicitação ajax
 
     });
-
-   
-
 
    } 
 
