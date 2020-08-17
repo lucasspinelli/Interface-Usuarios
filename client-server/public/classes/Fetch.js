@@ -41,7 +41,7 @@ class Fetch{
 
                     method,
                     body: JSON.stringify(params),
-                    headers: new Header({
+                    headers: new Headers({
                         'Content-Type':'application/json'
                     }) 
         
