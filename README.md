@@ -14,7 +14,7 @@
 
 <h3> Para testar :</h3>
 • Abra seu terminal e digite npm install para as dependencias </br>
-• Caso a página ainda esteja quebrada, digite npm install bower -g </br>
+• Caso a página ainda esteja quebrada, digite npm install -g bower</br>
 • bower install  </br>
 
 
